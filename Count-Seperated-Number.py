@@ -21,11 +21,7 @@ d = {}
 
 for i in range(1,1001):
 
-	for j in str(i):
+    for j in str(i):
+        d[int(j)] = d.get(int(j),0) + 1
 
-		if d.get(j) == None:
-			d[int(j)] = 1  # dic 의 key 값을 int로 하면 자동 정렬 됨
-		else:
-			d[int(j)] = d[j] + 1
-
-print d.items()
+print(d.items())
