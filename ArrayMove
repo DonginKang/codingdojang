@@ -15,3 +15,40 @@ K = 3
 
 print array_right_rotation(A,len(A),K)
 print array_left_rotation(A,len(A),K)
+
+
+def getNumberPad(inputNumberPad, rotationStr):
+    numberPad = []
+    from copy import deepcopy
+    N = len(inputNumberPad)
+    inp = deepcopy(inputNumberPad)
+
+    def moveUD(input, number, N):
+        inp = deepcopy(input)
+        for i in range(N):
+            move = (i + number) % N
+            inp[move] = input[i]
+        return inp
+
+    def moveLR(input, number, N):
+        inp = deepcopy(input)
+        for i in range(N):
+            for j in range(N):
+                move = (j + number) % N
+                inp[i][move] = input[i][j]
+        return inp
+
+    for i in range(0, len(rotationStr), 2):
+        item = rotationStr[i:i+2]
+        num, type = int(item[0]), item[1]
+
+        if type == "U":
+            inp = moveUD(inp, -num, N)
+        if type == "D":
+            inp = moveUD(inp, num, N)
+        if type == "L" :
+            inp = moveLR(inp, -num, N)
+        if type == "R" :
+            inp = moveLR(inp, num, N)
+
+    numberPad = inp
